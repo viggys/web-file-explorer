@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${hostName}"></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+th {
+  text-align: left;
+}
+
+    </style>
+</head>
+
+<body bgcolor="white">
+<h3>Index: [(${data.currentPath})]</h3>
+<hr>
+<table style="width:100%">
+    <tr>
+        <th text-align="left">Name</th>
+        <th>Last Modified</th>
+    </tr>
+    <tr>
+        <td><a th:href="${data.rootHref}">Home</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="${data.parentHref}">Parent</a></td>
+    </tr>
+    <tr th:each="artifact : ${data.artifacts}">
+        <td><a th:href="${artifact.inspectUrl}" th:text="${artifact.name}"/></td>
+        <td><a th:text="${artifact.lastModifiedAt}"/></td>
+        <td><a th:href="${artifact.downloadUrl}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
+        </div>
+    </tr>
+</table>
+<hr>
+</body>
+
+</html>

@@ -7,10 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.util.List;
 
 public class PathUtilTest {
 
@@ -19,7 +17,14 @@ public class PathUtilTest {
     @Test
     public void list() throws IOException {
         Path path = SystemUtil.getUserHome();
-        Set<Path> files = PathUtil.list(path);
+        List<Path> files = PathUtil.list(path);
         log.info("{}", files);
+    }
+
+    @Test
+    public void getLink() {
+        Path path = SystemUtil.getUserHome();
+        String link = PathUtil.getInspectUrl(path);
+        System.out.println(link);
     }
 }
