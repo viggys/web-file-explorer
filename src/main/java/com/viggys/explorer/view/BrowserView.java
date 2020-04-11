@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 public interface BrowserView {
 
-    ResponseEntity generateInspectResponse(HttpServletRequest request, TemplateEngine templateEngine) throws UnknownHostException;
+    ResponseEntity generateInspectResponse(HttpServletRequest request, TemplateEngine templateEngine) throws IOException;
 
     ResponseEntity generateDownloadResponse(HttpServletRequest request) throws IOException;
 

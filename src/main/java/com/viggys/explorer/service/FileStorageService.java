@@ -24,7 +24,10 @@ public class FileStorageService implements StorageServiceInterface {
 
     @Override
     public BrowserView inspect(Path path) {
-        return null;
+        Assert.isTrue(path.toFile().isFile(), "Resource is not a file.");
+
+        Resource resource = new PathResource(path);
+        return new FileView(resource);
     }
 
     @Override
