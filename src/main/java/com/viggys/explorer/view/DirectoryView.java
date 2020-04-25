@@ -1,7 +1,9 @@
 package com.viggys.explorer.view;
 
 import com.viggys.explorer.model.Artifact;
+import com.viggys.explorer.model.PathLink;
 import com.viggys.explorer.model.handler.ArtifactComparator;
+import com.viggys.explorer.util.DirectoryUtil;
 import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.util.SystemUtil;
 import lombok.Getter;
@@ -26,16 +28,17 @@ public class DirectoryView implements BrowserView {
     private static final String DIRECTORY_VIEW = "directory.html";
 
     @NonNull
-    private String currentPath;
+    private List<PathLink> currentPathTree;
     private String parentHref;
     private String rootHref;
     private List<Artifact> artifacts;
 
-    public DirectoryView(@NonNull Path currentPath, List<Path> artifactPaths) {
-        this.currentPath = currentPath.toString();
+    public DirectoryView(@NonNull Path currentPath, List<Path> artifactPaths, boolean showHidden) {
+        this.currentPathTree = DirectoryUtil.getPathTreeMap(currentPath);
         this.parentHref = PathUtil.getInspectUrl(currentPath.getParent());
         this.rootHref = PathUtil.getInspectUrl(currentPath.getRoot());
         this.artifacts = artifactPaths.stream()
+                .filter(path -> (showHidden || !path.toFile().isHidden()))
                 .map(Artifact::new)
                 .collect(Collectors.toList());
         Collections.sort(this.artifacts, new ArtifactComparator());

@@ -2,21 +2,16 @@ package com.viggys.explorer.test.util;
 
 
 import com.viggys.explorer.util.SystemUtil;
-import org.junit.jupiter.api.Disabled;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
+@Slf4j
 public class SystemUtilTest {
 
-    private static final Logger log = LoggerFactory.getLogger(SystemUtilTest.class);
-
     @Test
-//    @Disabled
     public void getSystemProperties() {
         Properties systemProps = System.getProperties();
         systemProps.entrySet().stream().forEach(prop -> {

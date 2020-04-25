@@ -4,10 +4,8 @@ import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.view.BrowserView;
 import com.viggys.explorer.view.DirectoryView;
 import lombok.Getter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.thymeleaf.TemplateEngine;
@@ -16,20 +14,19 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+@Slf4j
 @Service
 public class DirectoryService implements StorageServiceInterface {
-
-    private static final Logger log = LoggerFactory.getLogger(DirectoryService.class);
 
     @Autowired @Getter
     private TemplateEngine templateEngine;
 
     @Override
-    public BrowserView inspect(Path path) throws IOException {
+    public BrowserView inspect(Path path, boolean showHidden) throws IOException {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         List<Path> artifactPaths = PathUtil.list(path);
-        return new DirectoryView(path, artifactPaths);
+        return new DirectoryView(path, artifactPaths, showHidden);
     }
 
     @Override

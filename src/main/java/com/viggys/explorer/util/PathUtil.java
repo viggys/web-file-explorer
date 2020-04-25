@@ -1,9 +1,8 @@
 package com.viggys.explorer.util;
 
 import com.viggys.explorer.controller.PathController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -19,11 +18,10 @@ import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+@Slf4j
 public class PathUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(PathUtil.class);
-
-    @Cacheable(value = "paths")
+    @CacheEvict(value = "paths")
     public static List<Path> list(Path path) throws IOException {
         Assert.notNull(path, "Path cannot be null.");
 

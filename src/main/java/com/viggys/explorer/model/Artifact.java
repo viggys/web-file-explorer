@@ -13,9 +13,9 @@ public class Artifact {
     private String inspectUrl;
     private String downloadUrl;
     private Date lastModifiedAt;
-    private boolean isHidden;
-    private boolean isDirectory;
-    private boolean isFile;
+    private Boolean isHidden;
+    private Boolean isDirectory;
+    private Boolean isFile;
 //    private IconType icon;
 
     public Artifact(Path path) {

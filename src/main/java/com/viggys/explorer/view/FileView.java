@@ -2,7 +2,6 @@ package com.viggys.explorer.view;
 
 import com.viggys.explorer.util.SystemUtil;
 import lombok.*;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 @RequiredArgsConstructor
 @Getter @Setter @ToString
@@ -61,7 +59,7 @@ public class FileView implements BrowserView {
             reader = new BufferedReader(new FileReader(resource.getFile()));
             StringBuilder contentBuilder = new StringBuilder();
             String line = reader.readLine();
-            while (StringUtils.isNotEmpty(line)) {
+            while (line != null) {
                 contentBuilder.append(line).append("\n");
                 line = reader.readLine();
             }
