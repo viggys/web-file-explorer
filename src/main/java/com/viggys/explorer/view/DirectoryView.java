@@ -29,14 +29,14 @@ public class DirectoryView implements BrowserView {
 
     @NonNull
     private List<PathLink> currentPathTree;
-    private String parentHref;
-    private String rootHref;
+    private PathLink parentPathLink;
+    private PathLink rootPathLink;
     private List<Artifact> artifacts;
 
     public DirectoryView(@NonNull Path currentPath, List<Path> artifactPaths, boolean showHidden) {
         this.currentPathTree = DirectoryUtil.getPathTreeMap(currentPath);
-        this.parentHref = PathUtil.getInspectUrl(currentPath.getParent());
-        this.rootHref = PathUtil.getInspectUrl(currentPath.getRoot());
+        this.parentPathLink = PathUtil.getPathLink(currentPath.getParent());
+        this.rootPathLink = PathUtil.getPathLink(SystemUtil.getUserHome());
         this.artifacts = artifactPaths.stream()
                 .filter(path -> (showHidden || !path.toFile().isHidden()))
                 .map(Artifact::new)

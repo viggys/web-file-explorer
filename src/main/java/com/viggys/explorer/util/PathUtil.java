@@ -1,6 +1,7 @@
 package com.viggys.explorer.util;
 
 import com.viggys.explorer.controller.PathController;
+import com.viggys.explorer.model.PathLink;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.util.Assert;
@@ -26,6 +27,17 @@ public class PathUtil {
         Assert.notNull(path, "Path cannot be null.");
 
         return Files.list(path).collect(Collectors.toList());
+    }
+
+    public static String getLabel(Path path) {
+        return path.getFileName() != null ? path.getFileName().toString() : "";
+    }
+
+    public static PathLink getPathLink(Path path) {
+        return PathLink.builder()
+                .label(getLabel(path))
+                .href(getInspectUrl(path))
+                .build();
     }
 
     public static String getInspectUrl(Path path) {

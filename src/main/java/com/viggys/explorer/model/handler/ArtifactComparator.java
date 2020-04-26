@@ -15,6 +15,6 @@ public class ArtifactComparator implements Comparator {
         Artifact file1 = (Artifact) o1;
         Artifact file2 = (Artifact) o2;
 
-        return file1.getName().compareTo(file2.getName());
+        return file1.getPathLink().getLabel().compareTo(file2.getPathLink().getLabel());
     }
 }

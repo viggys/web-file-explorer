@@ -5,7 +5,6 @@ import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 public interface BrowserView {
 

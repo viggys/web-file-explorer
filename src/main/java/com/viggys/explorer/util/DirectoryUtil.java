@@ -12,7 +12,7 @@ public class DirectoryUtil extends PathUtil {
     public static List<PathLink> getPathTreeMap(Path path) {
         List<PathLink> pathTreeStack = new Stack<>();
         while (!path.equals(path.getRoot())) {
-            PathLink pathLink = PathLink.builder().label((path.getFileName().toString())).href(PathUtil.getInspectUrl(path)).build();
+            PathLink pathLink = getPathLink(path);
             pathTreeStack.add(pathLink);
             path = path.getParent();
         }

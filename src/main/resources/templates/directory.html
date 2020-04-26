@@ -15,8 +15,8 @@ th {
 
 <body bgcolor="white">
 <span>
-    <a th:href="${data.parentHref}"><i class="material-icons">arrow_back</i></a>
-    <a th:href="${data.rootHref}"><i class="material-icons">home</i></a>
+    <a th:href="${data.parentPathLink.href}"><i class="material-icons">arrow_back</i></a>
+    <a th:href="${data.rootPathLink.href}"><i class="material-icons">home</i></a>
 </span>
 <br/>
 <h3 th:each="segment : ${data.currentPathTree}" style="display:inline">
@@ -33,9 +33,9 @@ th {
     </thead>
     <tbody>
         <tr th:each="artifact : ${data.artifacts}">
-            <td><a th:href="${artifact.inspectUrl}" th:text="${artifact.name}"/></td>
+            <td><a th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
             <td><small th:text="${artifact.lastModifiedAt}"/></td>
-            <td th:if="${artifact.isFile}"><a th:href="${artifact.downloadUrl}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
+            <td th:if="${artifact.isFile}"><a th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
         </tr>
     </tbody>
 </table>
