@@ -6,21 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${hostName}"></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        h3 {
-            font-family: "Lucida Console", Monaco, monospace;
-        }
-
-        th {
-            text-align: left;
-            font-family: "Lucida Console", Monaco, monospace;
-            text-transform: uppercase;
-        }
-
-        textarea {
-            font-family: "Lucida Console", Monaco, monospace;
-        }
-    </style>
+    <style th:insert="/styles/styles.css"></style>
+    <script th:insert="/scripts/actions.js"></script>
 </head>
 
 <body bgcolor="white">

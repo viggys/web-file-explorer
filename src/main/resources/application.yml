@@ -5,8 +5,3 @@ server:
 
 spring:
   application.name: '@project.artifactId@'
-  thymeleaf:
-    cache: false
-    enabled: true
-    prefix: classpath:/templates/
-    suffix: .html

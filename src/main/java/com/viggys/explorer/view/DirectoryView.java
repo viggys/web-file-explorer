@@ -9,6 +9,7 @@ import com.viggys.explorer.util.SystemUtil;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,11 +20,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Getter
 @RequiredArgsConstructor
 public class DirectoryView implements BrowserView {
 
-    private static final String DIRECTORY_VIEW = "directory.html";
+    private static final String INSPECT_VIEW = "/views/directory/inspect.html";
 
     @NonNull
     private List<PathLink> currentPathTree;
@@ -44,7 +46,7 @@ public class DirectoryView implements BrowserView {
 
     @Override
     public ModelAndView generateInspectResponse(HttpServletRequest request) throws UnknownHostException {
-        ModelAndView modelAndView = new ModelAndView(DIRECTORY_VIEW);
+        ModelAndView modelAndView = new ModelAndView(INSPECT_VIEW);
         modelAndView.addObject("hostName", SystemUtil.getHostName());
         modelAndView.addObject("userName",SystemUtil.getUserName());
         modelAndView.addObject("ip",SystemUtil.getIPAddress());

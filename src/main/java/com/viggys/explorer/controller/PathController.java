@@ -31,7 +31,7 @@ public class PathController {
         try{
             String fqPathValue = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
             Path path = PathUtil.resolvePath(fqPathValue);
-            log.info("path: [{}]", path);
+            log.info("INSPECT: [{}]", path);
 
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
             BrowserView view = storageService.inspect(path, showHidden);
@@ -51,7 +51,7 @@ public class PathController {
         try{
             String fqPathValue = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
             Path path = PathUtil.resolvePath(fqPathValue.substring(0,fqPathValue.indexOf("/download")));
-            log.info("path: [{}]", path);
+            log.info("DOWNLOAD: [{}]", path);
 
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
             BrowserView view = storageService.download(path);
