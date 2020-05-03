@@ -1,33 +1,46 @@
 package com.viggys.explorer.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 
-import static com.viggys.explorer.util.Constants.USER_HOME;
-import static com.viggys.explorer.util.Constants.USER_NAME;
-
+@Slf4j
 public class SystemUtil {
 
+    private SystemUtil() {}
+
+    public static final void load() {
+        log.info("Loading SystemUtil...");
+    }
+
+    private static final String USER_NAME = System.getProperty(Constants.USER_NAME);
+    private static final Path USER_HOME = Path.of(System.getProperty(Constants.USER_HOME));
+    private static String IP_ADDRESS;
+    private static String HOST_NAME;
+
+    static {
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            IP_ADDRESS = inetAddress.getHostAddress();
+            HOST_NAME = inetAddress.getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String getUserName() {
-        return System.getProperty(USER_NAME);
+        return USER_NAME;
     }
 
     public static Path getUserHome() {
-        return Path.of(System.getProperty(USER_HOME));
+        return USER_HOME;
     }
 
-    private static InetAddress getInetAddress() throws UnknownHostException {
-        return InetAddress.getLocalHost();
-    }
+    public static String getIPAddress() { return IP_ADDRESS; }
 
-    public static String getIPAddress() throws UnknownHostException {
-        return getInetAddress().getHostAddress();
-    }
-
-    public static String getHostName() throws UnknownHostException {
-        return getInetAddress().getHostName();
-    }
+    public static String getHostName() { return HOST_NAME; }
 
 
 }
