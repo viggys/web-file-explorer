@@ -8,25 +8,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Path;
 
 @Slf4j
-@RestController
+@Controller
 public class PathController {
 
     @Autowired private StorageServiceFactory serviceFactory;
 
     @GetMapping(path = "**",
             produces = MediaType.ALL_VALUE)
-    public ResponseEntity inspect(HttpServletRequest request,
-                                  @RequestParam(required = false, defaultValue = "false") Boolean showHidden) {
+    public ModelAndView inspect(HttpServletRequest request,
+                                @RequestParam(required = false, defaultValue = "false") Boolean showHidden) {
         try{
             String fqPathValue = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
             Path path = PathUtil.resolvePath(fqPathValue);
@@ -35,7 +36,7 @@ public class PathController {
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
             BrowserView view = storageService.inspect(path, showHidden);
 
-            return view.generateInspectResponse(request, storageService.getTemplateEngine());
+            return view.generateInspectResponse(request);
 
         }
         catch(IOException ieo) {

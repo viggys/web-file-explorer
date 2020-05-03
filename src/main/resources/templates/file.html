@@ -17,7 +17,7 @@
             text-transform: uppercase;
         }
 
-        tr {
+        textarea {
             font-family: "Lucida Console", Monaco, monospace;
         }
     </style>
@@ -30,25 +30,13 @@
 </span>
 <br/>
 <h3 th:each="segment : ${data.currentPathTree}" style="display:inline">
-   > <a th:href="${segment.href}">[(${segment.label})]</a>
+    > <a th:href="${segment.href}">[(${segment.label})]</a>
 </h3>
 
 <hr>
-<table style="width:100%">
-    <thead>
-        <tr>
-            <th text-align="left">Name</th>
-            <th>Last Modified</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="artifact : ${data.artifacts}">
-            <td><a th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
-            <td><small th:text="${artifact.lastModifiedAt}"/></td>
-            <td th:if="${artifact.isFile}"><a th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
-        </tr>
-    </tbody>
-</table>
+<div style="width:100%">
+    <textarea rows="40" style="width:100%">[(${data.content})]</textarea>
+</div>
 <hr>
 </body>
 

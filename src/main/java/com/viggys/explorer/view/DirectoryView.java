@@ -9,10 +9,8 @@ import com.viggys.explorer.util.SystemUtil;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.UnknownHostException;
@@ -45,15 +43,14 @@ public class DirectoryView implements BrowserView {
     }
 
     @Override
-    public ResponseEntity generateInspectResponse(HttpServletRequest request, TemplateEngine templateEngine) throws UnknownHostException {
-        Context context = new Context();
-        context.setVariable("hostName", SystemUtil.getHostName());
-        context.setVariable("userName",SystemUtil.getUserName());
-        context.setVariable("ip",SystemUtil.getIPAddress());
-        context.setVariable("data", this);
+    public ModelAndView generateInspectResponse(HttpServletRequest request) throws UnknownHostException {
+        ModelAndView modelAndView = new ModelAndView(DIRECTORY_VIEW);
+        modelAndView.addObject("hostName", SystemUtil.getHostName());
+        modelAndView.addObject("userName",SystemUtil.getUserName());
+        modelAndView.addObject("ip",SystemUtil.getIPAddress());
+        modelAndView.addObject("data", this);
 
-        String view = templateEngine.process(DIRECTORY_VIEW, context);
-        return ResponseEntity.status(HttpStatus.OK).body(view);
+        return modelAndView;
     }
 
     @Override

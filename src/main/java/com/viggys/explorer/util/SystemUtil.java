@@ -1,10 +1,11 @@
 package com.viggys.explorer.util;
 
-import static com.viggys.explorer.util.Constants.*;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
+
+import static com.viggys.explorer.util.Constants.USER_HOME;
+import static com.viggys.explorer.util.Constants.USER_NAME;
 
 public class SystemUtil {
 

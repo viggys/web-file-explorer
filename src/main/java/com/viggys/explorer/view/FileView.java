@@ -1,19 +1,24 @@
 package com.viggys.explorer.view;
 
+import com.viggys.explorer.model.PathLink;
+import com.viggys.explorer.util.DirectoryUtil;
+import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.util.SystemUtil;
 import lombok.*;
+import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter @Setter @ToString
@@ -21,22 +26,30 @@ public class FileView implements BrowserView {
 
     private static final String FILE_VIEW = "file.html";
 
-    @NonNull
     private Resource resource;
+    private String content;
+    private List<PathLink> currentPathTree;
+    private PathLink parentPathLink;
+    private PathLink rootPathLink;
+
+    public FileView(@NonNull Path currentPath) {
+        this.currentPathTree = DirectoryUtil.getPathTreeMap(currentPath);
+        this.parentPathLink = PathUtil.getPathLink(currentPath.getParent());
+        this.rootPathLink = PathUtil.getPathLink(SystemUtil.getUserHome());
+        this.resource = new PathResource(currentPath);
+    }
 
     @Override
-    public ResponseEntity generateInspectResponse(HttpServletRequest request, TemplateEngine templateEngine) throws IOException {
-        Context context = new Context();
-        context.setVariable("hostName", SystemUtil.getHostName());
-        context.setVariable("userName",SystemUtil.getUserName());
-        context.setVariable("ip",SystemUtil.getIPAddress());
-        context.setVariable("data", this);
+    public ModelAndView generateInspectResponse(HttpServletRequest request) throws IOException {
+        this.content = generateContent();
 
-//        String view = templateEngine.process(FILE_VIEW, context);
-        String view = generateContent();
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(view);
+        ModelAndView modelAndView = new ModelAndView(FILE_VIEW);
+        modelAndView.addObject("hostName", SystemUtil.getHostName());
+        modelAndView.addObject("userName",SystemUtil.getUserName());
+        modelAndView.addObject("ip",SystemUtil.getIPAddress());
+        modelAndView.addObject("data", this);
+
+        return modelAndView;
     }
 
     @Override
@@ -70,4 +83,5 @@ public class FileView implements BrowserView {
         }
         return content;
     }
+
 }
