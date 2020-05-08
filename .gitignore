@@ -1,3 +1,9 @@
-/web-file-explorer.iml
-/target/
+# IntelliJ
+/*.iml
 /.idea/
+
+# Maven
+/target/
+
+# Project
+**/*-secret.*

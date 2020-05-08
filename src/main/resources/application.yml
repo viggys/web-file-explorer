@@ -2,6 +2,9 @@ server:
   port: 8080
   servlet:
     context-path: /explorer
+    session:
+      timeout: 60s
 
 spring:
-  application.name: '@project.artifactId@'
+  application.name: '@project.name@'
+  profiles.active: secret

@@ -4,44 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${hostName}"></title>
+    <title th:text="${@environment.getProperty('spring.application.name')}"></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style th:insert="/styles/styles.css"></style>
     <script th:insert="/scripts/actions.js"></script>
 </head>
 
 <body bgcolor="white">
-<span>
-    <a th:href="${data.parentPathLink.href}"><i class="material-icons">arrow_back</i></a>
-    <a th:href="${data.rootPathLink.href}"><i class="material-icons">home</i></a>
-</span>
-<br/>
-<h3 th:each="segment : ${data.currentPathTree}" style="display:inline">
-   > <a th:href="${segment.href}">[(${segment.label})]</a>
-</h3>
-
-<hr>
-<table style="width:100%">
-    <thead>
-        <tr>
-            <th text-align="left">Name</th>
-            <th>Last Modified</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="artifact : ${data.artifacts}">
-            <td><a th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
-            <td><small th:text="${artifact.lastModifiedAt}"/></td>
-            <td th:if="${artifact.isFile}"><a th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
-        </tr>
-    </tbody>
-</table>
-<hr>
+    <!--<span>
+        <a th:href="${data.parentPathLink.href}"><i class="material-icons">arrow_back</i></a>
+        <a th:href="${data.rootPathLink.href}"><i class="material-icons">home</i></a>
+    </span>
+    <br/>-->
+    <div class="head-container">
+        <h3 style="display:inline">pwd </h3>
+        <h3 th:each="segment : ${data.currentPathTree}" style="display:inline">
+           > <a th:href="${segment.href}">[(${segment.label})]</a>
+        </h3>
+    </div>
+    <hr>
+    <div class="body-container">
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th text-align="left">Name</th>
+                    <th>Last Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="artifact : ${data.artifacts}">
+                    <td><a th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
+                    <td><small th:text="${artifact.lastModifiedAt}"/></td>
+                    <td th:if="${artifact.isFile}"><a th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
+<hr>
 <footer>
-    <p>Logged in: [(${userName})]</p>
-    <p>IP Address: [(${ip})]</p>
+    <div class="foot-container">
+        <p>whoami: [(${userName})]</p>
+        <p>host: [(${hostName})]</p>
+        <p>ip: [(${ip})]</p>
+    </div>
 </footer>
 
 </html>
