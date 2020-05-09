@@ -1,21 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+body {
+	background-color: #292c34;
+	font-size: 100%;
+}
+
+.page-container {
+    /*display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-around;*/
+}
+
+.head-container {
+    /*display: flex;
+    flex-direction: row;*/
+    color: #dddddd;
+	font-family: 'Ubuntu', sans-serif, monospace;
+    text-shadow: 0em 0em 0.05em;
+    word-spacing: 0.5em
+}
+
+.body-container {
+    /*display: flex;
+    flex-direction: row;
+    align-content: stretch;*/
+    width: 100%
+	color: #dddddd;
+	font-family: 'Open Sans', sans-serif, monospace;
+    text-shadow: 0em 0em 0.05em;
+}
+
+.foot-container {
+    /*display: flex;
+    flex-direction: row;*/
+	color: #dddddd;
+	font-family: 'Open Sans', sans-serif, monospace;
+    text-shadow: 0em 0em 0.05em;
+    letter-spacing: 0.2em;
+    font-size: 1em;
+}
+
 h3 {
-    font-family: "Lucida Console", Monaco, monospace;
+    display: inline;
 }
 
-th {
+.head-link {
+    color: #dddddd;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    font-size: 1.25em;
+}
+
+.head-link:hover {
+    color: #dddddd;
+    background-color: #616161;
+}
+
+.body-link {
+    color: #dddddd;
+    text-decoration: none;
+}
+
+.body-link:hover {
+    color: #dddddd;
+    background-color: #616161;
+}
+
+.download-link {
+    color: #808080;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    color: #bfbfbf;
+    text-decoration: none;
+}
+
+.content {
+    color: #dddddd;
+    background-color: #434856;
+    height: 45em;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.table-header {
     text-align: left;
-    font-family: "Lucida Console", Monaco, monospace;
+    color: #dddddd;
+    font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-size: 1.25em;
 }
 
-tr {
-    font-family: "Lucida Console", Monaco, monospace;
-}
-
-textarea {
-    font-family: "Lucida Console", Monaco, monospace;
-}
-
-p {
-    font-family: "Lucida Console", Monaco, monospace;
+.table-row {
+    color: #dddddd;
+    letter-spacing: 0.20em;
+    font-size: 1em;
 }

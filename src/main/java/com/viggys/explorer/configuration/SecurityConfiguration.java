@@ -25,16 +25,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.inMemoryAuthentication()
-            .withUser(username)
-            .password(encoder.encode(password))
-            .roles("USER");
+                .withUser(username).password(encoder.encode(password)).roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-            .httpBasic();
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/")
+                .and()
+                .httpBasic()
+                .and()
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID");
     }
 }
