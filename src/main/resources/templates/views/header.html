@@ -1,0 +1,4 @@
+<h3>pwd </h3>
+<h3 th:each="segment : ${data.currentPathTree}">
+    > <a class="head-link" th:href="${segment.href}">[(${segment.label})]</a>
+</h3>

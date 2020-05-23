@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public interface BrowserView {
+public interface ViewInterface {
 
     ModelAndView generateInspectResponse(HttpServletRequest request) throws IOException;
 

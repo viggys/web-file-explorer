@@ -1,53 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${@environment.getProperty('spring.application.name')}"></title>
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
-    <style th:insert="/styles/styles.css"></style>
-    <script th:insert="/scripts/actions.js"></script>
-</head>
+<head th:insert="/views/metadata.html"></head>
 
-<div class="page-container">
+
+<div class="window-container">
     <body>
-        <div class="head-container">
-            <h3>pwd </h3>
-            <h3 th:each="segment : ${data.currentPathTree}">
-               > <a class="head-link" th:href="${segment.href}">[(${segment.label})]</a>
-            </h3>
-            <hr>
-        </div>
-
+    <div class="page-container">
+        <div class="actions-container" th:insert="/views/directory/options.html"></div>
+        <hr>
         <div class="body-container">
-            <table>
-                <thead class="table-header">
+            <div class="head-container" th:insert="/views/header.html"></div>
+            <hr>
+            <div class="data-container">
+                <table>
+                    <thead class="table-header">
                     <!--<tr>
                         <th>Name</th>
                         <th>Last Modified</th>
                     </tr>-->
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr class="table-row" th:each="artifact : ${data.artifacts}">
-                        <td><a class="body-link" th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
+                        <td><a class="data-link" th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
                         <td><small th:text="${artifact.lastModifiedAt}"/></td>
-                        <td th:if="${artifact.isFile}"><a class="download-link" th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">cloud_download</i></a></td>
+                        <td th:if="${artifact.isFile}"><a class="download-link" th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">get_app</i></a></td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
     </body>
 
-    <footer>
-        <table class="foot-container">
-            <hr>
-            <tr>
-                <td>whoami: [(${userName})]</td>
-                <td>host: [(${hostName})]</td>
-                <td>ip: [(${ip})]</td>
-            </tr>
-        </table>
-    </footer>
+    <footer th:insert="/views/footer.html"></footer>
 </div>
+
 </html>

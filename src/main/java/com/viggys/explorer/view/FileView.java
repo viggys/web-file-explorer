@@ -4,6 +4,7 @@ import com.viggys.explorer.model.PathLink;
 import com.viggys.explorer.util.DirectoryUtil;
 import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.util.SystemUtil;
+import com.viggys.explorer.util.ViewUtil;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.PathResource;
@@ -24,7 +25,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Getter @Setter @ToString
-public class FileView implements BrowserView {
+public class FileView implements ViewInterface {
 
     private static final String INSPECT_VIEW = "/views/file/inspect.html";
 
@@ -45,10 +46,8 @@ public class FileView implements BrowserView {
     public ModelAndView generateInspectResponse(HttpServletRequest request) throws IOException {
         this.content = generateContent();
 
-        ModelAndView modelAndView = new ModelAndView(INSPECT_VIEW);
-        modelAndView.addObject("hostName", SystemUtil.getHostName());
-        modelAndView.addObject("userName",SystemUtil.getUserName());
-        modelAndView.addObject("ip",SystemUtil.getIPAddress());
+        ModelAndView modelAndView = ViewUtil.getModelViewWithMetadata();
+        modelAndView.setViewName(INSPECT_VIEW);
         modelAndView.addObject("data", this);
 
         return modelAndView;

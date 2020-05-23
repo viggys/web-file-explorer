@@ -6,6 +6,7 @@ import com.viggys.explorer.model.handler.ArtifactComparator;
 import com.viggys.explorer.util.DirectoryUtil;
 import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.util.SystemUtil;
+import com.viggys.explorer.util.ViewUtil;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Getter
 @RequiredArgsConstructor
-public class DirectoryView implements BrowserView {
+public class DirectoryView implements ViewInterface {
 
     private static final String INSPECT_VIEW = "/views/directory/inspect.html";
 
@@ -46,10 +47,8 @@ public class DirectoryView implements BrowserView {
 
     @Override
     public ModelAndView generateInspectResponse(HttpServletRequest request) throws UnknownHostException {
-        ModelAndView modelAndView = new ModelAndView(INSPECT_VIEW);
-        modelAndView.addObject("hostName", SystemUtil.getHostName());
-        modelAndView.addObject("userName",SystemUtil.getUserName());
-        modelAndView.addObject("ip",SystemUtil.getIPAddress());
+        ModelAndView modelAndView = ViewUtil.getModelViewWithMetadata();
+        modelAndView.setViewName(INSPECT_VIEW);
         modelAndView.addObject("data", this);
 
         return modelAndView;

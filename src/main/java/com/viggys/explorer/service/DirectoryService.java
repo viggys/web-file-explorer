@@ -1,7 +1,7 @@
 package com.viggys.explorer.service;
 
 import com.viggys.explorer.util.PathUtil;
-import com.viggys.explorer.view.BrowserView;
+import com.viggys.explorer.view.ViewInterface;
 import com.viggys.explorer.view.DirectoryView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class DirectoryService implements StorageServiceInterface {
 
     @Override
-    public BrowserView inspect(Path path, boolean showHidden) throws IOException {
+    public ViewInterface inspect(Path path, boolean showHidden) throws IOException {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         List<Path> artifactPaths = PathUtil.list(path);
@@ -24,14 +24,14 @@ public class DirectoryService implements StorageServiceInterface {
     }
 
     @Override
-    public BrowserView download(Path path) {
+    public ViewInterface download(Path path) {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         return null;
     }
 
     @Override
-    public BrowserView upload(Path path) {
+    public ViewInterface upload(Path path) {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         return null;

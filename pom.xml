@@ -6,16 +6,16 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.viggys</groupId>
     <artifactId>web-file-explorer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Web FileExplorer</name>
+    <name>MyPC</name>
     <description>Demo project for Web File Explorer</description>
 
     <properties>
         <java.version>11</java.version>
+        <application.name>Test</application.name>
     </properties>
 
     <dependencies>

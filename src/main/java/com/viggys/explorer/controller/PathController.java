@@ -3,7 +3,7 @@ package com.viggys.explorer.controller;
 import com.viggys.explorer.service.StorageServiceFactory;
 import com.viggys.explorer.service.StorageServiceInterface;
 import com.viggys.explorer.util.PathUtil;
-import com.viggys.explorer.view.BrowserView;
+import com.viggys.explorer.view.ViewInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +34,7 @@ public class PathController {
             log.info("INSPECT: [{}]", path);
 
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
-            BrowserView view = storageService.inspect(path, showHidden);
+            ViewInterface view = storageService.inspect(path, showHidden);
 
             return view.generateInspectResponse(request);
 
@@ -54,7 +54,7 @@ public class PathController {
             log.info("DOWNLOAD: [{}]", path);
 
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
-            BrowserView view = storageService.download(path);
+            ViewInterface view = storageService.download(path);
 
             return view.generateDownloadResponse(request);
 

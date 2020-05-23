@@ -6,5 +6,7 @@ server:
       timeout: 60s
 
 spring:
-  application.name: '@project.name@'
+  application.name: MyPC
   profiles.active: secret
+
+logging.level.root: INFO

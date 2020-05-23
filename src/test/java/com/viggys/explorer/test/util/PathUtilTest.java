@@ -25,7 +25,7 @@ public class PathUtilTest {
 
     @Test
     public void getLink() {
-        Path path = SystemUtil.getUserHome();
+        Path path = new File("/").toPath(); //SystemUtil.getUserHome();
         String link = PathUtil.getInspectUrl(path);
         System.out.println(link);
     }

@@ -1,66 +1,154 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-html {
-	background-color: #292c34;
-	font-size: 100%;
-	width: 100%;
+:root {
+    --primary: #dddddd;
+    --primary-background: #292c34;
+    --hover: #dddddd;
+    --hover-background: #616161;
+    --text: #dddddd;
+    --text-background: #434856;
 }
 
-.page-container {
+html {
+	background-color: var(--primary-background);
+    color: var(--primary);
+    font-size: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+a {
+    padding: 0.25em;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: var(--hover-background);
+    color: var(--hover);
+    cursor: default;
+    /*-ms-transform: scale(1.5); *//* IE 9 *//*
+    -webkit-transform: scale(1.5); *//* Safari 3-8 *//*
+    transform: scale(1.5);*/
+}
+
+hr {
+    margin: 0.25em;
+}
+
+.window-container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: stretch;
-    min-height: 100vh;
-    margin: 1em;
+    height: 100vh;
+    margin: 0.5em;
 }
 
-.head-container {
+.page-container {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
     width: 100%;
-    color: #dddddd;
-	font-family: 'Ubuntu', sans-serif, monospace;
+    font-family: 'Open Sans', sans-serif, monospace;
     text-shadow: 0em 0em 0.05em;
-    word-spacing: 0.5em
+}
+
+.foot-container {
+    width: 100%;
+    font-family: 'Open Sans', sans-serif, monospace;
+    text-shadow: 0em 0em 0.05em;
+    letter-spacing: 0.2em;
+    font-size: 1em;
+    margin-bottom: 1.5em;
+}
+
+.foot-container > tr > td {
+    display: flex;
+    align-items: center;
+}
+
+.actions-container {
+    display: flex;
+    flex-direction: column;
+    /*flex = 0;*/
+    flex-wrap: nowrap;
+    transition: width 3s;
+    font-family: 'Ubuntu', sans-serif, monospace;
+}
+
+/*.actions-container > table > tbody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}*/
+
+.action {
+    cursor: default;
+    height: 2em;
+}
+
+.action:hover {
+    background-color: var(--hover-background);
+    color: var(--hover);
+
+}
+
+.menu-opened,#menu-opened {
+    display: none;
 }
 
 .body-container {
     display: flex;
     flex: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
+    margin: 0em 0em 0.25em 0em;
+}
+
+.head-container {
+    /*display: flex;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    flex-shrink: 0;*/
     width: 100%;
-	color: #dddddd;
+	font-family: 'Ubuntu', sans-serif, monospace;
+    text-shadow: 0em 0em 0.05em;
+    word-spacing: 0.5em;
+    margin: 0em 0.25em;
+}
+
+.data-container {
+    display: flex;
+    flex: 1;
+    overflow-y: scroll;
+    width: 100%;
 	font-family: 'Open Sans', sans-serif, monospace;
     text-shadow: 0em 0em 0.05em;
 }
 
-.body-container > * {
+.data-container > * {
     width: 100%;
     table-layout: inherit;
     align-content: center;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    /*padding-top: 0.5em;
+    padding-bottom: 0.5em;*/
 }
 
 .content {
     display: flex;
     flex: 1;
-    color: #dddddd;
-    background-color: #434856;
+    color: var(--text);
+    background-color: var(--text-background);
     font-family: 'Open Sans', sans-serif, monospace;
-    font-size: 15px;
+    font-size: 1em;
     line-height: 1.8;
     word-spacing: 0.5em
-}
-
-.foot-container {
-    width: 100%;
-	color: #dddddd;
-	font-family: 'Open Sans', sans-serif, monospace;
-    text-shadow: 0em 0em 0.05em;
-    letter-spacing: 0.2em;
-    font-size: 1em;
-    padding-bottom: 2em;
 }
 
 h3 {
@@ -68,40 +156,34 @@ h3 {
 }
 
 .head-link {
-    color: #dddddd;
-    text-decoration: none;
     letter-spacing: 0.2em;
     font-size: 1.25em;
 }
 
 .head-link:hover {
-    color: #dddddd;
-    background-color: #616161;
+
 }
 
-.body-link {
-    color: #dddddd;
-    text-decoration: none;
+.data-link {
+
 }
 
-.body-link:hover {
-    color: #dddddd;
-    background-color: #616161;
+.data-link:hover {
+
 }
 
 .download-link {
     color: #808080;
-    text-decoration: none;
+    background-color: var(--background-color);
 }
 
 .download-link:hover {
     color: #bfbfbf;
-    text-decoration: none;
+    background-color: var(--background-color);
 }
 
 .table-header {
     text-align: left;
-    color: #dddddd;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5em;
@@ -109,10 +191,13 @@ h3 {
 }
 
 .table-row {
-    color: #dddddd;
     letter-spacing: 0.20em;
     font-size: 1em;
     width: 100%;
     height: 2em;
+}
+
+.logout-link:hover {
+    background: inherit;
 }
 
