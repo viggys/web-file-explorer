@@ -13,7 +13,7 @@ import java.nio.file.Path;
 public class FileStorageService implements StorageServiceInterface {
 
     @Override
-    public ViewInterface inspect(Path path, boolean showHidden) {
+    public ViewInterface inspect(Path path) {
         Assert.isTrue(path.toFile().isFile(), "Resource is not a file.");
         return new FileView(path);
     }

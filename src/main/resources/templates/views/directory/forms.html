@@ -1,0 +1,21 @@
+<form class="form" id="addForm" name="addForm" action="/create" method="post" enctype="application/json">
+    <div class="form-content">
+        <div>
+            <input type="radio" id="file" name="type" value="file" checked="true">
+            <label>File</label>
+            <input type="radio" id="directory" name="type" value="directory">
+            <label>Directory</label>
+        </div>
+        <div>
+            <input type="text" id="filename" name="filename" value="Enter filename" onclick="resetText(this)">
+        </div>
+        <div class="form-options">
+            <div onclick="submitForm('addForm')" class="options">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <div onclick="closeForm('addForm')" class="options">
+                <i class="material-icons">cancel</i>
+            </div>
+        </div>
+    </div>
+</form>

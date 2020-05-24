@@ -3,34 +3,37 @@
 
 <head th:insert="/views/metadata.html"></head>
 
+<div class="forms" th:insert="/views/directory/forms.html"></div>
 
 <div class="window-container">
     <body>
-    <div class="page-container">
-        <div class="actions-container" th:insert="/views/directory/options.html"></div>
-        <hr>
-        <div class="body-container">
-            <div class="head-container" th:insert="/views/header.html"></div>
+        <div class="page-container">
+            <div class="actions-container" th:insert="/views/directory/options.html"></div>
             <hr>
-            <div class="data-container">
-                <table>
-                    <thead class="table-header">
-                    <!--<tr>
-                        <th>Name</th>
-                        <th>Last Modified</th>
-                    </tr>-->
-                    </thead>
-                    <tbody>
-                    <tr class="table-row" th:each="artifact : ${data.artifacts}">
-                        <td><a class="data-link" th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
-                        <td><small th:text="${artifact.lastModifiedAt}"/></td>
-                        <td th:if="${artifact.isFile}"><a class="download-link" th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">get_app</i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="body-container">
+                <div class="head-container" th:insert="/views/header.html"></div>
+                <hr>
+                <div class="data-container">
+                    <table>
+                        <thead class="table-header">
+                        <!--<tr>
+                            <th>Name</th>
+                            <th>Last Modified</th>
+                        </tr>-->
+                        </thead>
+                        <tbody>
+
+                            <tr th:each="artifact : ${data.artifacts}" th:class="${artifact.isHidden} ? 'table-row hidden' : 'table-row'">
+                                <td><a class="data-link" th:href="${artifact.pathLink.href}" th:text="${artifact.pathLink.label}"/></td>
+                                <td><small th:text="${artifact.lastModifiedAt}"/></td>
+                                <td th:if="${artifact.isFile}"><a class="download-link" th:href="${artifact.downloadHref}" alt="Download"><i class="material-icons">get_app</i></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
     </body>
 
     <footer th:insert="/views/footer.html"></footer>

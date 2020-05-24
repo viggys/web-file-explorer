@@ -16,11 +16,11 @@ import java.util.List;
 public class DirectoryService implements StorageServiceInterface {
 
     @Override
-    public ViewInterface inspect(Path path, boolean showHidden) throws IOException {
+    public ViewInterface inspect(Path path) throws IOException {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         List<Path> artifactPaths = PathUtil.list(path);
-        return new DirectoryView(path, artifactPaths, showHidden);
+        return new DirectoryView(path, artifactPaths);
     }
 
     @Override

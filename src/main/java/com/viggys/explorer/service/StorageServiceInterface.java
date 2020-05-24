@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public interface StorageServiceInterface {
 
-    ViewInterface inspect(Path path, boolean showHidden) throws IOException;
+    ViewInterface inspect(Path path) throws IOException;
 
     ViewInterface download(Path path);
 

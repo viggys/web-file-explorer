@@ -34,12 +34,12 @@ public class DirectoryView implements ViewInterface {
     private PathLink rootPathLink;
     private List<Artifact> artifacts;
 
-    public DirectoryView(@NonNull Path currentPath, List<Path> artifactPaths, boolean showHidden) {
+    public DirectoryView(@NonNull Path currentPath, List<Path> artifactPaths) {
         this.currentPathTree = DirectoryUtil.getPathTreeMap(currentPath);
         this.parentPathLink = PathUtil.getPathLink(currentPath.getParent());
         this.rootPathLink = PathUtil.getPathLink(SystemUtil.getUserHome());
         this.artifacts = artifactPaths.stream()
-                .filter(path -> (showHidden || !path.toFile().isHidden()))
+//                .filter(path -> (showHidden || !path.toFile().isHidden()))
                 .map(Artifact::new)
                 .collect(Collectors.toList());
         Collections.sort(this.artifacts, new ArtifactComparator());

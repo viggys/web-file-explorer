@@ -26,15 +26,15 @@ public class PathController {
 
     @GetMapping(path = "**",
             produces = MediaType.ALL_VALUE)
-    public ModelAndView inspect(HttpServletRequest request,
-                                @RequestParam(required = false, defaultValue = "false") Boolean showHidden) {
+    public ModelAndView inspect(HttpServletRequest request/*,
+                                @RequestParam(required = false, defaultValue = "false") Boolean showHidden*/) {
         try{
             String fqPathValue = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
             Path path = PathUtil.resolvePath(fqPathValue);
             log.info("INSPECT: [{}]", path);
 
             StorageServiceInterface storageService = serviceFactory.getStorageService(path);
-            ViewInterface view = storageService.inspect(path, showHidden);
+            ViewInterface view = storageService.inspect(path);
 
             return view.generateInspectResponse(request);
 

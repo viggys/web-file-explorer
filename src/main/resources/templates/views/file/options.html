@@ -1,24 +1,25 @@
 <table>
-    <thead class="table-header">
-    <tr class="action" onclick="toggleOptions()">
-        <th id="menu-closed"><i class="material-icons">menu</i></th>
-        <th id="menu-opened"><i class="material-icons">menu_open</i></th>
-    </tr>
+    <thead>
+        <tr class="action" onclick="toggleOptions()">
+            <th><i id="menu" class="material-icons">menu</i></th>
+        </tr>
     </thead>
     <tbody>
-    <tr class="action" onclick="remove()">
-        <td><i class="material-icons">remove</i></td>
-        <td class="menu-opened">Remove</td>
-    </tr>
-    <tr class="action" onclick="update()">
-        <td><i class="material-icons">create</i></td>
-        <td class="menu-opened">Update</td>
-    </tr>
-    <tr class="action">
-        <td><i class="material-icons">power_settings_new</i></td>
-        <td class="menu-opened">
-            <a class="logout-link" th:href="${#strings.concat(base,'/logout')}">exit</a>
-        </td>
-    </tr>
+        <tr class="action" onclick="update()">
+            <td>
+                <span>
+                    <i class="material-icons">create</i>
+                    <p class="menu-opened">Update</p>
+                </span>
+            </td>
+        </tr>
+        <tr class="action">
+            <td>
+                <span>
+                    <i class="material-icons">power_settings_new</i>
+                    <a class="logout-link menu-opened" th:href="${#strings.concat(base,'/logout')}">exit</a>
+                </span>
+            </td>
+        </tr>
     </tbody>
 </table>
