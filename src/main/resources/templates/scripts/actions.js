@@ -51,6 +51,10 @@ function update() {
     console.log('Selected Update Option');
 }
 
+function logout() {
+    location.replace([[@{/logout}]]);
+}
+
 function submitForm(formId) {
     var form = document.getElementById(formId);
     sendHttpRequest(formId, form.action, 'POST', toJSONString(form));
@@ -101,7 +105,7 @@ function toJSONString(form) {
     return obj;
 }
 
-function sendHttpRequest(formId, url, method, body) {
+function sendPostHttpRequest(formId, url, body) {
     var http = new XMLHttpRequest();
     http.onreadystatechange = function() {
         if (http.readyState == 4) {
@@ -113,7 +117,7 @@ function sendHttpRequest(formId, url, method, body) {
             }
         }
     };
-    http.open(method, url, true);
+    http.open('POST', url, true);
     http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
     http.setRequestHeader('Content-Type', 'application/json');
     delete body['_csrf'];
