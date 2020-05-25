@@ -17,7 +17,6 @@ public class Artifact {
     private Boolean isHidden;
     private Boolean isDirectory;
     private Boolean isFile;
-//    private IconType icon;
 
     public Artifact(Path path) {
         this.pathLink = PathUtil.getPathLink(path);
@@ -26,7 +25,6 @@ public class Artifact {
         this.isHidden = path.toFile().isHidden();
         this.isDirectory = path.toFile().isDirectory();
         this.isFile = path.toFile().isFile();
-//        this.icon = this.isDirectory ? IconType.DIRECTORY : IconType.FILE;
     }
 
 }

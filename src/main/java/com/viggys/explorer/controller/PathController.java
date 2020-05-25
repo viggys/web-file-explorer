@@ -1,16 +1,21 @@
 package com.viggys.explorer.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viggys.explorer.service.StorageServiceFactory;
 import com.viggys.explorer.service.StorageServiceInterface;
 import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.view.ViewInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,6 +68,15 @@ public class PathController {
             log.error("Exception in PathController.list :: ", ieo);
             return null;
         }
+    }
+
+    @PostMapping(path = "/create",
+            consumes = MediaType.ALL_VALUE)
+    public ResponseEntity create(HttpServletRequest request,
+                                 @RequestBody JsonNode file) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        log.info("CREATE: {}", mapper.writeValueAsString(file));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

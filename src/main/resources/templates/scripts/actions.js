@@ -53,13 +53,26 @@ function update() {
 
 function submitForm(formId) {
     var form = document.getElementById(formId);
-    console.log('Form', form);
-    var jsonReq = toJSONString(form);
+    sendHttpRequest(formId, form.action, 'POST', toJSONString(form));
+    closeForm(formId);
 }
 
 function closeForm(formId) {
     var form = document.getElementById(formId);
     form.style['display'] = 'none';
+    form.reset();
+}
+
+function successNotify(formId) {
+    var notify = document.getElementById(formId + 'Success');
+    notify.style['display'] = 'flex';
+    setTimeout(function() { notify.style['display'] = "none"; }, 2000);
+}
+
+function failNotify(formId) {
+    var notify = document.getElementById(formId + 'Failed');
+    notify.style['display'] = 'flex';
+    setTimeout(function() { notify.style['display'] = "none"; }, 2000);
 }
 
 function toJSONString(form) {
@@ -67,23 +80,42 @@ function toJSONString(form) {
     var elements = form.getElementsByTagName('input');
     for( var i = 0; i < elements.length; ++i ) {
         var element = elements[i];
+        var id = element.id;
+        var type = element.type;
         var name = element.name;
         var value = element.value;
 
-        if(name) {
-            if(element.type == 'radio') {
-                if(element.checked) {
-                    obj[name] = value;
-                }
+        if(type == 'radio') {
+            value = element.checked;
+        }
+
+        if(id || name) {
+            if(id) {
+                obj[id] = value;
             }
             else {
                 obj[name] = value;
             }
         }
     }
-    console.log('JSON', obj);
+    return obj;
 }
 
-function resetText(elem) {
-    elem.value = '';
+function sendHttpRequest(formId, url, method, body) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (http.readyState == 4) {
+            if(http.status >= 200 && http.status < 300) {
+                successNotify(formId);
+            }
+            else {
+                failNotify(formId);
+            }
+        }
+    };
+    http.open(method, url, true);
+    http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
+    http.setRequestHeader('Content-Type', 'application/json');
+    delete body['_csrf'];
+    http.send(JSON.stringify(body));
 }
