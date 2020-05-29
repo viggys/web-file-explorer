@@ -1,12 +1,14 @@
 package com.viggys.explorer.service;
 
+import com.viggys.explorer.model.request.AddRequest;
+import com.viggys.explorer.model.response.DirectoryView;
+import com.viggys.explorer.model.response.ViewInterface;
 import com.viggys.explorer.util.PathUtil;
-import com.viggys.explorer.view.ViewInterface;
-import com.viggys.explorer.view.DirectoryView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -28,6 +30,17 @@ public class DirectoryService implements StorageServiceInterface {
         Assert.isTrue(path.toFile().isDirectory(), "Resource is not a directory.");
 
         return null;
+    }
+
+    public void create(AddRequest request) throws IOException {
+        File file = new File(PathUtil.resolvePath(request.getPath()).toString()
+                + File.separator + request.getFilename());
+        if(request.isDirectory()) {
+            file.mkdir();
+        }
+        else if(request.isFile()) {
+            file.createNewFile();
+        }
     }
 
     @Override

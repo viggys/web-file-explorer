@@ -1,11 +1,13 @@
 package com.viggys.explorer.service;
 
-import com.viggys.explorer.view.ViewInterface;
-import com.viggys.explorer.view.FileView;
+import com.viggys.explorer.model.request.AddRequest;
+import com.viggys.explorer.model.response.ViewInterface;
+import com.viggys.explorer.model.response.FileView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 @Slf4j

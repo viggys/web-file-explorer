@@ -1,6 +1,6 @@
 package com.viggys.explorer.util;
 
-import com.viggys.explorer.model.PathLink;
+import com.viggys.explorer.model.response.PathLink;
 
 import java.nio.file.Path;
 import java.util.Collections;

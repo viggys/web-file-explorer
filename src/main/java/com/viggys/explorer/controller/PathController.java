@@ -1,12 +1,13 @@
 package com.viggys.explorer.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.viggys.explorer.model.request.AddRequest;
+import com.viggys.explorer.model.response.ViewInterface;
+import com.viggys.explorer.service.DirectoryService;
 import com.viggys.explorer.service.StorageServiceFactory;
 import com.viggys.explorer.service.StorageServiceInterface;
 import com.viggys.explorer.util.PathUtil;
-import com.viggys.explorer.view.ViewInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,10 +74,18 @@ public class PathController {
     @PostMapping(path = "/create",
             consumes = MediaType.ALL_VALUE)
     public ResponseEntity create(HttpServletRequest request,
-                                 @RequestBody JsonNode file) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        log.info("CREATE: {}", mapper.writeValueAsString(file));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+                                 @RequestBody AddRequest addRequest) throws JsonProcessingException {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            log.info("CREATE: {}", mapper.writeValueAsString(addRequest));
+            Path path = PathUtil.resolvePath(addRequest.getPath());
+            DirectoryService storageService = (DirectoryService) serviceFactory.getStorageService(path);
+            storageService.create(addRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 }

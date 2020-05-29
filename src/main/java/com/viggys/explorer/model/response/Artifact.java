@@ -1,4 +1,4 @@
-package com.viggys.explorer.model;
+package com.viggys.explorer.model.response;
 
 import com.viggys.explorer.util.PathUtil;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.viggys.explorer.util;
 
 import com.viggys.explorer.controller.PathController;
-import com.viggys.explorer.model.PathLink;
+import com.viggys.explorer.model.response.PathLink;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.util.Assert;

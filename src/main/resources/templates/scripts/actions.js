@@ -1,4 +1,20 @@
-console.log('Hello World !!')
+var baseUri = [[@{/}]];
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+/*if(isMobile) {
+    console.log('Loading mobile view: ', isMobile);
+    var footer = document.getElementsByClassName('foot-container')[0];
+    console.log('footer', footer);
+    footer.style.flexDirection = 'column';
+//    footer.style['padding'] = '0.25em 0.5em';
+}*/
+
+function getCurrentPathUri() {
+    console.log('baseUri: ', baseUri);
+    var currentPathUri = '/' + location.pathname.split(baseUri)[1];
+    console.log('currentPathUri: ', currentPathUri);
+    return currentPathUri;
+}
 
 function toggleOptions() {
     var menu = document.getElementById("menu");
@@ -57,7 +73,11 @@ function logout() {
 
 function submitForm(formId) {
     var form = document.getElementById(formId);
-    sendHttpRequest(formId, form.action, 'POST', toJSONString(form));
+    var path = form.elements['path'];
+    if(path) {
+        path.value = getCurrentPathUri();
+    }
+    sendPostHttpRequest(formId, form.action, toJSONString(form));
     closeForm(formId);
 }
 
@@ -70,7 +90,11 @@ function closeForm(formId) {
 function successNotify(formId) {
     var notify = document.getElementById(formId + 'Success');
     notify.style['display'] = 'flex';
-    setTimeout(function() { notify.style['display'] = "none"; }, 2000);
+    setTimeout(function() {
+        notify.style['display'] = "none";
+        location.reload();
+    },
+    2000);
 }
 
 function failNotify(formId) {
@@ -102,6 +126,7 @@ function toJSONString(form) {
             }
         }
     }
+    console.log('JSON request: ', obj);
     return obj;
 }
 

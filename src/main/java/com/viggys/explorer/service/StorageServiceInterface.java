@@ -1,6 +1,6 @@
 package com.viggys.explorer.service;
 
-import com.viggys.explorer.view.ViewInterface;
+import com.viggys.explorer.model.response.ViewInterface;
 
 import java.io.IOException;
 import java.nio.file.Path;

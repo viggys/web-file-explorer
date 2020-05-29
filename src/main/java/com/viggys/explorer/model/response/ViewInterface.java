@@ -1,4 +1,4 @@
-package com.viggys.explorer.view;
+package com.viggys.explorer.model.response;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;

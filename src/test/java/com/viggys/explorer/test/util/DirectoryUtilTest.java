@@ -1,6 +1,6 @@
 package com.viggys.explorer.test.util;
 
-import com.viggys.explorer.model.PathLink;
+import com.viggys.explorer.model.response.PathLink;
 import com.viggys.explorer.util.DirectoryUtil;
 import com.viggys.explorer.util.PathUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
-package com.viggys.explorer.model.handler;
+package com.viggys.explorer.model.response.handler;
 
-import com.viggys.explorer.model.Artifact;
+import com.viggys.explorer.model.response.Artifact;
 import org.springframework.util.Assert;
 
 import java.util.Comparator;

@@ -1,6 +1,5 @@
-package com.viggys.explorer.view;
+package com.viggys.explorer.model.response;
 
-import com.viggys.explorer.model.PathLink;
 import com.viggys.explorer.util.DirectoryUtil;
 import com.viggys.explorer.util.PathUtil;
 import com.viggys.explorer.util.SystemUtil;
