@@ -65,6 +65,9 @@ function remove() {
 
 function update() {
     console.log('Selected Update Option');
+//    document.getElementById('content').readOnly = false;
+    var updateForm = document.getElementById('updateForm');
+    updateForm.style['display'] = 'flex';
 }
 
 function logout() {
@@ -74,10 +77,19 @@ function logout() {
 function submitForm(formId) {
     var form = document.getElementById(formId);
     var path = form.elements['path'];
+    var content = form.elements['content'];
     if(path) {
         path.value = getCurrentPathUri();
     }
-    sendPostHttpRequest(formId, form.action, toJSONString(form));
+    if(content) {
+        content.value = document.getElementById('content').value;
+    }
+    if(formId.startsWith('add')) {
+        sendPostHttpRequest(formId, form.action, toJSONString(form));
+    }
+    else if(formId.startsWith('update')) {
+        sendPutHttpRequest(formId, form.action, toJSONString(form));
+    }
     closeForm(formId);
 }
 
@@ -126,7 +138,6 @@ function toJSONString(form) {
             }
         }
     }
-    console.log('JSON request: ', obj);
     return obj;
 }
 
@@ -143,6 +154,25 @@ function sendPostHttpRequest(formId, url, body) {
         }
     };
     http.open('POST', url, true);
+    http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
+    http.setRequestHeader('Content-Type', 'application/json');
+    delete body['_csrf'];
+    http.send(JSON.stringify(body));
+}
+
+function sendPutHttpRequest(formId, url, body) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (http.readyState == 4) {
+            if(http.status >= 200 && http.status < 300) {
+                successNotify(formId);
+            }
+            else {
+                failNotify(formId);
+            }
+        }
+    };
+    http.open('PUT', url, true);
     http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
     http.setRequestHeader('Content-Type', 'application/json');
     delete body['_csrf'];

@@ -3,6 +3,8 @@
 
 <head th:insert="/views/metadata.html"></head>
 
+<div class="forms" th:insert="/views/file/forms.html"></div>
+
 <div class="window-container">
     <body>
         <div class="alerts" th:insert="/views/alerts.html"></div>
@@ -13,7 +15,7 @@
                 <div class="head-container" th:insert="/views/header.html"></div>
                 <hr>
                 <div class="data-container">
-                    <textarea class="content">[(${data.content})]</textarea>
+                    <textarea id="content" class="content">[(${data.content})]</textarea>
                 </div>
             </div>
         </div>

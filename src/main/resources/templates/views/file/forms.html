@@ -1,0 +1,17 @@
+<form class="form" id="updateForm" name="updateForm" th:action="@{/update}" method="post">
+    <input type="hidden" name="path">
+    <input type="hidden" name="content">
+    <div class="form-content">
+        <div>
+            <label>Save Changes?</label>
+        </div>
+        <div class="form-options">
+            <div onclick="submitForm('updateForm')" class="options submit">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <div onclick="closeForm('updateForm')" class="options cancel">
+                <i class="material-icons">cancel</i>
+            </div>
+        </div>
+    </div>
+</form>

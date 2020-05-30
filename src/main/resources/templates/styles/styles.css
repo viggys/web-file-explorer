@@ -204,16 +204,29 @@ input[type=text] {
     flex: 1;
 }
 
-.options:hover {
-    background-color: var(--hover-background);
-    color: var(--hover);
-}
-
 .options > * {
     display: flex;
     flex: 1;
     padding: 0.5em;
     justify-content: space-evenly;
+}
+
+.submit {
+    color: green;
+}
+
+.submit:hover {
+    color: var(--primary);
+    background-color: green;
+}
+
+.cancel {
+    color: red;
+}
+
+.cancel:hover {
+    color: var(--primary);
+    background-color: red;
 }
 
 .success {

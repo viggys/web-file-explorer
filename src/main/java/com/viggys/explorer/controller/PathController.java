@@ -3,8 +3,10 @@ package com.viggys.explorer.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viggys.explorer.model.request.AddRequest;
+import com.viggys.explorer.model.request.UpdateRequest;
 import com.viggys.explorer.model.response.ViewInterface;
 import com.viggys.explorer.service.DirectoryService;
+import com.viggys.explorer.service.FileStorageService;
 import com.viggys.explorer.service.StorageServiceFactory;
 import com.viggys.explorer.service.StorageServiceInterface;
 import com.viggys.explorer.util.PathUtil;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -82,6 +85,23 @@ public class PathController {
             DirectoryService storageService = (DirectoryService) serviceFactory.getStorageService(path);
             storageService.create(addRequest);
             return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PutMapping(path = "/update",
+            consumes = MediaType.ALL_VALUE)
+    public ResponseEntity update(HttpServletRequest request,
+                                 @RequestBody UpdateRequest updateRequest) throws JsonProcessingException {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            log.info("UPDATE: {}", mapper.writeValueAsString(updateRequest));
+            Path path = PathUtil.resolvePath(updateRequest.getPath());
+            FileStorageService storageService = (FileStorageService) serviceFactory.getStorageService(path);
+            storageService.update(updateRequest);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
         }
         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

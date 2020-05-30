@@ -1,12 +1,16 @@
 package com.viggys.explorer.service;
 
-import com.viggys.explorer.model.request.AddRequest;
-import com.viggys.explorer.model.response.ViewInterface;
+import com.viggys.explorer.model.request.UpdateRequest;
 import com.viggys.explorer.model.response.FileView;
+import com.viggys.explorer.model.response.ViewInterface;
+import com.viggys.explorer.util.PathUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -29,5 +33,16 @@ public class FileStorageService implements StorageServiceInterface {
     @Override
     public ViewInterface upload(Path path) {
         return null;
+    }
+
+    public void update(UpdateRequest updateRequest) throws IOException {
+        File file = PathUtil.resolvePath(updateRequest.getPath()).toFile();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        try {
+            writer.write(updateRequest.getContent());
+        }
+        finally {
+            writer.close();
+        }
     }
 }
