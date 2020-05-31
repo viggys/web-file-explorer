@@ -1,11 +1,10 @@
 package com.viggys.explorer.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 
+@ToString
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AddRequest {
 
     @NonNull private String path;

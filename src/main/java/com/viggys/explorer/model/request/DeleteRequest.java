@@ -5,8 +5,9 @@ import lombok.*;
 @ToString
 @Getter
 @RequiredArgsConstructor
-public class UpdateRequest {
+public class DeleteRequest {
 
     @NonNull private String path;
-    @NonNull private String content;
+    @NonNull private String filename;
+
 }

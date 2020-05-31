@@ -1,4 +1,4 @@
-<form class="form" id="updateForm" name="updateForm" th:action="@{/update}" method="post">
+<form class="form" id="updateForm" name="updateForm" th:action="@{/update}" method="put">
     <input type="hidden" name="path">
     <input type="hidden" name="content">
     <div class="form-content">
@@ -10,6 +10,26 @@
                 <i class="material-icons">check_circle</i>
             </div>
             <div onclick="closeForm('updateForm')" class="options cancel">
+                <i class="material-icons">cancel</i>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form" id="deleteForm" name="deleteForm" th:action="@{/delete}" method="delete">
+    <input type="hidden" name="path">
+    <div class="form-content">
+        <div>
+            <label>Confirm filename to delete permanently</label>
+        </div>
+        <div>
+            <input type="text" id="filename" name="filename" placeholder="Name" required autofocus>
+        </div>
+        <div class="form-options">
+            <div onclick="submitForm('deleteForm')" class="options submit">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <div onclick="closeForm('deleteForm')" class="options cancel">
                 <i class="material-icons">cancel</i>
             </div>
         </div>

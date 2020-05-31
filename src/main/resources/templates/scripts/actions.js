@@ -60,12 +60,13 @@ function add() {
 }
 
 function remove() {
-    console.log('Selected Remove Option');
+    console.log('Selected Delete Option');
+    var deleteForm = document.getElementById('deleteForm');
+    deleteForm.style['display'] = 'flex';
 }
 
 function update() {
     console.log('Selected Update Option');
-//    document.getElementById('content').readOnly = false;
     var updateForm = document.getElementById('updateForm');
     updateForm.style['display'] = 'flex';
 }
@@ -90,6 +91,9 @@ function submitForm(formId) {
     else if(formId.startsWith('update')) {
         sendPutHttpRequest(formId, form.action, toJSONString(form));
     }
+    else if(formId.startsWith('delete')) {
+        sendDeleteHttpRequest(formId, form.action, toJSONString(form));
+    }
     closeForm(formId);
 }
 
@@ -99,12 +103,12 @@ function closeForm(formId) {
     form.reset();
 }
 
-function successNotify(formId) {
+function successNotify(formId, redirectTo) {
     var notify = document.getElementById(formId + 'Success');
     notify.style['display'] = 'flex';
     setTimeout(function() {
         notify.style['display'] = "none";
-        location.reload();
+        location.replace(redirectTo);
     },
     2000);
 }
@@ -138,6 +142,7 @@ function toJSONString(form) {
             }
         }
     }
+    console.log('JSON: ', obj);
     return obj;
 }
 
@@ -146,7 +151,8 @@ function sendPostHttpRequest(formId, url, body) {
     http.onreadystatechange = function() {
         if (http.readyState == 4) {
             if(http.status >= 200 && http.status < 300) {
-                successNotify(formId);
+                var redirectTo = location.href;
+                successNotify(formId, redirectTo);
             }
             else {
                 failNotify(formId);
@@ -165,7 +171,8 @@ function sendPutHttpRequest(formId, url, body) {
     http.onreadystatechange = function() {
         if (http.readyState == 4) {
             if(http.status >= 200 && http.status < 300) {
-                successNotify(formId);
+                var redirectTo = location.href;
+                successNotify(formId, redirectTo);
             }
             else {
                 failNotify(formId);
@@ -173,6 +180,26 @@ function sendPutHttpRequest(formId, url, body) {
         }
     };
     http.open('PUT', url, true);
+    http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
+    http.setRequestHeader('Content-Type', 'application/json');
+    delete body['_csrf'];
+    http.send(JSON.stringify(body));
+}
+
+function sendDeleteHttpRequest(formId, url, body) {
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function() {
+        if (http.readyState == 4) {
+            if(http.status >= 200 && http.status < 300) {
+                var redirectTo = location.href.substring(0, location.href.lastIndexOf('/'));
+                successNotify(formId, redirectTo);
+            }
+            else {
+                failNotify(formId);
+            }
+        }
+    };
+    http.open('DELETE', url, true);
     http.setRequestHeader('X-CSRF-TOKEN', body['_csrf']);
     http.setRequestHeader('Content-Type', 'application/json');
     delete body['_csrf'];

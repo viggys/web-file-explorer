@@ -1,5 +1,6 @@
 package com.viggys.explorer.service;
 
+import com.viggys.explorer.model.request.DeleteRequest;
 import com.viggys.explorer.model.request.UpdateRequest;
 import com.viggys.explorer.model.response.FileView;
 import com.viggys.explorer.model.response.ViewInterface;
@@ -12,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Slf4j
@@ -43,6 +45,16 @@ public class FileStorageService implements StorageServiceInterface {
         }
         finally {
             writer.close();
+        }
+    }
+
+    public void delete(DeleteRequest deleteRequest) throws IOException {
+        Path path = PathUtil.resolvePath(deleteRequest.getPath());
+        if(path.getFileName().toString().equals(deleteRequest.getFilename())) {
+            Files.delete(path);
+        }
+        else {
+            throw new IllegalArgumentException("Filename does not match with delete request");
         }
     }
 }
