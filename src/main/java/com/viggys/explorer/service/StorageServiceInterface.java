@@ -1,5 +1,6 @@
 package com.viggys.explorer.service;
 
+import com.viggys.explorer.model.request.DeleteRequest;
 import com.viggys.explorer.model.response.ViewInterface;
 
 import java.io.IOException;
@@ -12,5 +13,7 @@ public interface StorageServiceInterface {
     ViewInterface download(Path path);
 
     ViewInterface upload(Path path);
+
+    void delete(DeleteRequest deleteRequest) throws IOException;
 
 }

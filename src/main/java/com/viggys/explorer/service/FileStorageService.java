@@ -48,13 +48,14 @@ public class FileStorageService implements StorageServiceInterface {
         }
     }
 
+    @Override
     public void delete(DeleteRequest deleteRequest) throws IOException {
         Path path = PathUtil.resolvePath(deleteRequest.getPath());
         if(path.getFileName().toString().equals(deleteRequest.getFilename())) {
             Files.delete(path);
         }
         else {
-            throw new IllegalArgumentException("Filename does not match with delete request");
+            throw new IllegalArgumentException("File name does not match with delete request");
         }
     }
 }

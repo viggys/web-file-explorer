@@ -110,7 +110,7 @@ public class PathController {
         try {
             log.info("DELETE: {}", deleteRequest);
             Path path = PathUtil.resolvePath(deleteRequest.getPath());
-            FileStorageService storageService = (FileStorageService) serviceFactory.getStorageService(path);
+            StorageServiceInterface storageService = serviceFactory.getStorageService(path);
             storageService.delete(deleteRequest);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
