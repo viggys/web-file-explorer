@@ -6,7 +6,13 @@ server:
       timeout: 60s
 
 spring:
-  application.name: MyPC
-  profiles.active: secret
+  application:
+    name: MyPC
+  profiles:
+    active: secret
+  security:
+    user:
+      name: ${USERNAME}
+      password: ${PASSWORD}
 
 logging.level.root: INFO
