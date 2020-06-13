@@ -5,7 +5,6 @@ import com.viggys.explorer.util.SystemUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import java.net.UnknownHostException;
 import java.util.Properties;
 
 @Slf4j
@@ -20,13 +19,13 @@ public class SystemUtilTest {
     }
 
     @Test
-    public void getIPAddress() throws UnknownHostException {
+    public void getIPAddress() {
         String ip = SystemUtil.getIPAddress();
         log.info("IP Address = " + ip);
     }
 
     @Test
-    public void getHostName() throws UnknownHostException {
+    public void getHostName() {
         String hostName = SystemUtil.getHostName();
         log.info("HostName = " + hostName);
     }

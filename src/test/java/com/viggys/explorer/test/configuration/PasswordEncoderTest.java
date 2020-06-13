@@ -13,6 +13,6 @@ public class PasswordEncoderTest {
     public void encodePassword() {
         String password = "test";
         String encoded = passwordEncoder.encode(password);
-        log.info("Encoded Password :: [{}]", encoded);
+        log.info("Encoded Password :: {}", encoded);
     }
 }

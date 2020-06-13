@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -31,8 +30,8 @@ public class PathUtilTest {
     }
 
     @Test
-    public void encodeValue() throws MalformedURLException {
-        String value = "/Users/vigneshsubramanian/Documents/My Documents";
+    public void encodeValue() {
+        String value = SystemUtil.getUserHome().toFile().getAbsolutePath() + "/Documents/My Documents";
         Path path = PathUtil.resolvePath(value);
         StringBuilder encodedPathBuilder = new StringBuilder();
         path.iterator().forEachRemaining(segment -> {

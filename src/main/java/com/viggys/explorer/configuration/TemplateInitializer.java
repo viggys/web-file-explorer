@@ -1,13 +1,14 @@
 package com.viggys.explorer.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
-import org.springframework.core.io.Resource;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.templateresolver.FileTemplateResolver;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -18,8 +19,8 @@ import java.util.Set;
 @Configuration
 public class TemplateInitializer {
 
-    @Value("classpath:templates")
-    private Resource templates;
+    @Autowired
+    private ApplicationContext context;
 
     private final Set<String> htmlTemplatePatterns = new HashSet<>();
     private final Set<String> cssTemplatePatterns = new HashSet<>();
@@ -34,9 +35,10 @@ public class TemplateInitializer {
 
     @Bean
     @Description("Template Resolver")
-    public FileTemplateResolver templateResolver() throws IOException {
-        FileTemplateResolver templateResolver = new FileTemplateResolver();
-        templateResolver.setPrefix(templates.getFile().getAbsolutePath());
+    public ITemplateResolver templateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(context);
+        templateResolver.setPrefix("classpath:/templates");
         templateResolver.setHtmlTemplateModePatterns(htmlTemplatePatterns);
         templateResolver.setCSSTemplateModePatterns(cssTemplatePatterns);
         templateResolver.setJavaScriptTemplateModePatterns(jsTemplatePatterns);
@@ -47,9 +49,10 @@ public class TemplateInitializer {
 
     @Bean
     @Description("Template Engine")
-    public SpringTemplateEngine templateEngine() throws IOException {
+    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) throws IOException {
+        log.info("Template Resolver :: {}", templateResolver);
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.addTemplateResolver(templateResolver());
+        templateEngine.addTemplateResolver(templateResolver);
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
