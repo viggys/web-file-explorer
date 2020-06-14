@@ -1,4 +1,4 @@
-<form class="form" id="updateForm" name="updateForm" th:action="@{/update}" method="put">
+<form class="form" id="updateForm" name="updateForm" th:action="@{/operation/update}" method="put">
     <input type="hidden" name="path">
     <input type="hidden" name="content">
     <div class="form-content">
@@ -16,7 +16,7 @@
     </div>
 </form>
 
-<form class="form" id="deleteForm" name="deleteForm" th:action="@{/delete}" method="delete">
+<form class="form" id="deleteForm" name="deleteForm" th:action="@{/operation/delete}" method="delete">
     <input type="hidden" name="path">
     <div class="form-content">
         <div>

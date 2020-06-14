@@ -1,9 +1,10 @@
 package com.viggys.explorer.util;
 
-import com.viggys.explorer.controller.PathController;
+import com.viggys.explorer.controller.ExploreController;
 import com.viggys.explorer.model.response.PathLink;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.hateoas.Link;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -36,33 +37,35 @@ public class PathUtil {
     public static PathLink getPathLink(Path path) {
         return PathLink.builder()
                 .label(getLabel(path))
-                .href(getInspectUrl(path))
+                .href(getInspectLink(path).getHref())
                 .build();
     }
 
-    public static String getInspectUrl(Path path) {
+    public static Link getInspectLink(Path path) {
         String encodedPath = encodeValue(path);
-        return linkTo(PathController.class)
+        return linkTo(ExploreController.class)
                 .slash(encodedPath)
-                .toUri().toString();
+                .withSelfRel();
     }
 
-    public static String getDownloadUrl(Path path) {
+    public static Link getDownloadLink(Path path) {
         String encodedPath = encodeValue(path);
-        return linkTo(PathController.class)
+        return linkTo(ExploreController.class)
                 .slash(encodedPath.concat(File.separator).concat("download"))
-                .toUri().toString();
+                .withSelfRel();
     }
 
     public static Path resolvePath(String path) {
         if(StringUtils.isEmpty(path) || path.equals("/")) {
             return SystemUtil.getUserHome();
         }
-        else {
-            String decodedPath = decodeValue(path);
-            validatePath(decodedPath);
-            return Path.of(decodedPath);
+        if(!path.startsWith("/")) {
+            path = "/" + path;
         }
+
+        String decodedPath = decodeValue(path);
+        validatePath(decodedPath);
+        return Path.of(decodedPath);
     }
 
     private static void validatePath(String path) {

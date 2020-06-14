@@ -1,4 +1,4 @@
-var baseUri = [[@{/}]];
+var exploreUri = [[${exploreUri}]];
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 /*if(isMobile) {
@@ -10,8 +10,8 @@ var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }*/
 
 function getCurrentPathUri() {
-    console.log('baseUri: ', baseUri);
-    var currentPathUri = '/' + location.pathname.split(baseUri)[1];
+    console.log('exploreUri: ', exploreUri);
+    var currentPathUri = location.pathname.split(exploreUri)[1];
     console.log('currentPathUri: ', currentPathUri);
     return currentPathUri;
 }

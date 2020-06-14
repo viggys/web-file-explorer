@@ -1,9 +1,9 @@
 server:
     port: 8080
     servlet:
-        context-path: /explorer
+        context-path: /mypc
         session:
-            timeout: 60s
+            timeout: 300s
 
 spring:
     application:

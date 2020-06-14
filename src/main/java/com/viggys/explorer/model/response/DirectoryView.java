@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +43,7 @@ public class DirectoryView implements ViewInterface {
     }
 
     @Override
-    public ModelAndView generateInspectResponse(HttpServletRequest request) throws UnknownHostException {
+    public ModelAndView generateInspectResponse(HttpServletRequest request) {
         ModelAndView modelAndView = ViewUtil.getModelViewWithMetadata();
         modelAndView.setViewName(INSPECT_VIEW);
         modelAndView.addObject("data", this);

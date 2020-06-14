@@ -1,4 +1,4 @@
-<form class="form" id="addForm" name="addForm" th:action="@{/create}" method="post">
+<form class="form" id="addForm" name="addForm" th:action="@{/operation/create}" method="post">
     <div class="form-content">
         <div>
             <input type="radio" id="isFile" name="type" value="file" checked="true">
@@ -23,7 +23,7 @@
     </div>
 </form>
 
-<form class="form" id="deleteForm" name="deleteForm" th:action="@{/delete}" method="delete">
+<form class="form" id="deleteForm" name="deleteForm" th:action="@{/operation/delete}" method="delete">
     <input type="hidden" name="path">
     <div class="form-content">
         <div>

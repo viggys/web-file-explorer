@@ -20,7 +20,7 @@ public class Artifact {
 
     public Artifact(Path path) {
         this.pathLink = PathUtil.getPathLink(path);
-        this.downloadHref = PathUtil.getDownloadUrl(path);
+        this.downloadHref = PathUtil.getDownloadLink(path).getHref();
         this.lastModifiedAt = DATE_FORMATTER.format(new Date(path.toFile().lastModified()));
         this.isHidden = path.toFile().isHidden();
         this.isDirectory = path.toFile().isDirectory();

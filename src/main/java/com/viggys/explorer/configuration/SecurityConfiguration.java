@@ -1,5 +1,6 @@
 package com.viggys.explorer.configuration;
 
+import com.viggys.explorer.util.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         PasswordEncoder encoder = encoder();
         auth.inMemoryAuthentication().passwordEncoder(encoder)
                 .withUser(username).password(password).roles("USER");
@@ -33,10 +33,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl(Constants.EXPLORE_CONTROLLER_URI, true)
                 .and()
                 .httpBasic()
                 .and()

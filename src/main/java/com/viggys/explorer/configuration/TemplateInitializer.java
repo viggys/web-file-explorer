@@ -43,7 +43,7 @@ public class TemplateInitializer {
         templateResolver.setCSSTemplateModePatterns(cssTemplatePatterns);
         templateResolver.setJavaScriptTemplateModePatterns(jsTemplatePatterns);
         templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(true);
+        templateResolver.setCacheable(false);
         return templateResolver;
     }
 

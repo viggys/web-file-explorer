@@ -202,6 +202,7 @@ input[type=text] {
 .options {
     display: flex;
     flex: 1;
+    min-width: 6em;
 }
 
 .options > * {
