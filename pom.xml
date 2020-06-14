@@ -9,9 +9,9 @@
     </parent>
     <groupId>com.github.viggys</groupId>
     <artifactId>web-file-explorer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>MyPC</name>
-    <description>Demo project for Web File Explorer</description>
+    <description>My Personal Cloud - Web File Explorer</description>
 
     <properties>
         <java.version>11</java.version>

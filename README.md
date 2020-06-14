@@ -4,7 +4,7 @@ MyPC [My Personal Cloud] is a web file explorer to browse files and directories 
 This is your personal cloud application which you can access within your local network using an Internet Browser.
 
 
-## What you can do?
+### What you can do?
 
 - Browse Files and Directories
 - Create Files and Directories
@@ -14,14 +14,25 @@ This is your personal cloud application which you can access within your local n
 - Delete Empty Directories
 - Show/Hide Hidden Files
 
-## How Secure is This?
+### Security
+Configure your Login credentials for the application using the below environment variables.
 
-Login credentials for the application requires the below environment variables.
+>__MYPC_USERNAME__ _(plain text)_
+>
+>__MYPC_PASSWORD__ _(BCrypt Encrypted)_
 
-USERNAME [plain text]
+For MacOS/Linux,
+```shell script
+export MYPC_USERNAME='...'
+export MYPC_PASSWORD='...'
+```
 
-PASSWORD [BCrypt Encrypted]
+For Windows,
+```shell script
+set MYPC_USERNAME='...'
+set MYPC_PASSWORD='...'
+```
 
 Generate your encrypted password from [here](https://bcrypt-generator.com).
 
-
+---

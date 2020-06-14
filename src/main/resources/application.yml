@@ -12,7 +12,7 @@ spring:
         active: secret
     security:
         user:
-            name: ${USERNAME}
-            password: ${PASSWORD}
+            name: ${mypc.username}
+            password: ${mypc.password}
 
 logging.level.root: INFO
