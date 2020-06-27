@@ -1,3 +1,5 @@
+![Build](https://github.com/viggys/web-file-explorer/workflows/Build/badge.svg)
+
 # MyPC
 MyPC [My Personal Cloud] is a web file explorer to browse files and directories of the system where the application is running.
 
