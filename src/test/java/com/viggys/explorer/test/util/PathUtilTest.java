@@ -31,7 +31,7 @@ public class PathUtilTest {
 
     @Test
     public void encodeValue() {
-        String value = SystemUtil.getUserHome().toFile().getAbsolutePath() + "/Documents/My Documents";
+        String value = SystemUtil.getUserHome().toFile().getAbsolutePath(); // + "/Documents/My Documents";
         Path path = PathUtil.resolvePath(value);
         StringBuilder encodedPathBuilder = new StringBuilder();
         path.iterator().forEachRemaining(segment -> {

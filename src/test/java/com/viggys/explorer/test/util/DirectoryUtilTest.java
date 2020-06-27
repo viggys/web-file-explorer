@@ -15,7 +15,7 @@ public class DirectoryUtilTest {
 
     @Test
     public void getPathTreeMap() {
-        String value = SystemUtil.getUserHome().toFile().getAbsolutePath() + "/Documents/My Documents";
+        String value = SystemUtil.getUserHome().toFile().getAbsolutePath(); // + "/Documents/My Tocuments";
         Path path = PathUtil.resolvePath(value);
         List<PathLink> pathTreeStack = DirectoryUtil.getPathTreeMap(path);
         pathTreeStack.forEach(System.out::println);
