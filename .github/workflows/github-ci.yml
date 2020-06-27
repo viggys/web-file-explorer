@@ -23,6 +23,7 @@ jobs:
       run: mvn compile
 
   test:
+    needs: [compile]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -35,6 +36,7 @@ jobs:
       run: mvn test
 
   build:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -47,6 +49,7 @@ jobs:
       run: mvn -P publish -B package --file pom.xml -Dmaven.test.skip=true
 
   publish:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
